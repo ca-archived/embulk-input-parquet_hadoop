@@ -26,6 +26,7 @@
 package org.embulk.input.parquet_hadoop;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.security.UserGroupInformation;
 import org.embulk.config.Config;
 import org.embulk.config.ConfigDefault;
 import org.embulk.config.ConfigException;
@@ -73,6 +74,7 @@ public class ConfigurationFactory
             logger.trace("embulk-input-parquet_hadoop: load a config: {}:{}", entry.getKey(), entry.getValue());
             c.set(entry.getKey(), entry.getValue());
         }
+        UserGroupInformation.setConfiguration(c);
 
         // For logging
         for (Map.Entry<String, String> entry : c) {
